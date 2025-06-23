@@ -1,0 +1,35 @@
+
+openapi: 3.0.0
+info:
+  title: "ncOS Local API"
+  description: "API for interacting with the ncOS trading engine."
+  version: "1.0.0"
+servers:
+  # IMPORTANT: You must replace this URL with your current ngrok URL
+  # every time you restart ngrok.
+  - url: "https://emerging-tiger-fair.ngrok-free.app"
+paths:
+  /api/status:
+    get:
+      summary: "Get System Status"
+      description: "Checks the current status of the ncOS server."
+      operationId: "getStatus"
+      responses:
+        '200':
+          description: "System status"
+          content:
+            application/json:
+              schema:
+                type: object
+  /api/signal:
+    get:
+      summary: "Get Trading Signal"
+      description: "Requests a trading signal from the ncOS engine."
+      operationId: "getSignal"
+      responses:
+        '200':
+          description: "Trading signal"
+          content:
+            application/json:
+              schema:
+                type: object

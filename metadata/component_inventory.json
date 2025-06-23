@@ -1,0 +1,227 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-06-21T12:00:00Z",
+  "components": {
+    "core": [
+      {
+        "name": "UnifiedOrchestrator",
+        "file": "core/orchestrators/unified_orchestrator.py",
+        "type": "orchestrator",
+        "description": "Core orchestration logic for the Neural Agent Mesh",
+        "dependencies": [
+          "SessionState",
+          "TokenBudgetManager",
+          "MemoryManager"
+        ]
+      },
+      {
+        "name": "NeuralMeshKernel",
+        "file": "src/kernel.py",
+        "type": "orchestrator",
+        "description": "Virtualizes multiple agents within a single LLM session",
+        "dependencies": [
+          "SessionState",
+          "TokenBudgetManager",
+          "MemoryManager"
+        ]
+      },
+      {
+        "name": "SessionState",
+        "file": "src/session_state.py",
+        "type": "state",
+        "description": "Manages the current state of the system session",
+        "dependencies": [
+          "TokenBudget",
+          "SystemConfig"
+        ]
+      },
+      {
+        "name": "TokenBudgetManager",
+        "file": "src/budget.py",
+        "type": "utility",
+        "description": "Manages token budget allocation and tracking",
+        "dependencies": [
+          "TokenBudget"
+        ]
+      }
+    ],
+    "models": [
+      {
+        "name": "BaseNCOSModel",
+        "file": "src/core.py",
+        "type": "schema",
+        "description": "Base model for all NCOS components",
+        "dependencies": []
+      },
+      {
+        "name": "AgentProfile",
+        "file": "src/core.py",
+        "type": "schema",
+        "description": "Agent profile definition",
+        "dependencies": [
+          "BaseNCOSModel",
+          "AgentCapability",
+          "AgentTrigger",
+          "AgentMemoryAccess"
+        ]
+      },
+      {
+        "name": "SystemConfig",
+        "file": "src/core.py",
+        "type": "schema",
+        "description": "System configuration schema",
+        "dependencies": [
+          "BaseNCOSModel",
+          "TokenBudgetConfig",
+          "MemoryConfig",
+          "AgentConfig"
+        ]
+      },
+      {
+        "name": "Message",
+        "file": "src/core.py",
+        "type": "schema",
+        "description": "Message model for agent communication",
+        "dependencies": [
+          "BaseNCOSModel",
+          "MessageType"
+        ]
+      }
+    ],
+    "agents": [
+      {
+        "name": "MacroAnalyser",
+        "file": "src/agents/macro_analyser.py",
+        "type": "agent",
+        "description": "Analyses macroeconomic factors and market context",
+        "dependencies": [
+          "BaseAgent"
+        ]
+      },
+      {
+        "name": "HTFAnalyst",
+        "file": "src/agents/htf_analyst.py",
+        "type": "agent",
+        "description": "Analyzes higher timeframe structure and validates trading setups",
+        "dependencies": [
+          "BaseAgent"
+        ]
+      },
+      {
+        "name": "RiskManager",
+        "file": "src/agents/risk_manager.py",
+        "type": "agent",
+        "description": "Manages position sizing and risk parameters for trades",
+        "dependencies": [
+          "BaseAgent"
+        ]
+      },
+      {
+        "name": "EntryExecutor",
+        "file": "src/agents/entry_executor.py",
+        "type": "agent",
+        "description": "Executes precision entries with Smart Money Concept validation",
+        "dependencies": [
+          "BaseAgent"
+        ]
+      },
+      {
+        "name": "TradeJournalist",
+        "file": "src/agents/trade_journalist.py",
+        "type": "agent",
+        "description": "Records and analyzes trade execution and performance",
+        "dependencies": [
+          "BaseAgent"
+        ]
+      }
+    ],
+    "adapters": [
+      {
+        "name": "BaseAdapter",
+        "file": "src/adapters/base_adapter.py",
+        "type": "adapter",
+        "description": "Base adapter class for agent adapters",
+        "dependencies": []
+      },
+      {
+        "name": "GPTAdapter",
+        "file": "src/adapters/gpt_adapter.py",
+        "type": "adapter",
+        "description": "Adapter for OpenAI GPT models",
+        "dependencies": [
+          "BaseAdapter"
+        ]
+      },
+      {
+        "name": "OpenAIAdapter",
+        "file": "src/adapters/openai_adapter.py",
+        "type": "adapter",
+        "description": "Adapter for OpenAI API",
+        "dependencies": [
+          "BaseAdapter"
+        ]
+      }
+    ],
+    "pipeline": [
+      {
+        "name": "BaseStage",
+        "file": "src/pipeline/base_stage.py",
+        "type": "pipeline",
+        "description": "Base class for pipeline stages",
+        "dependencies": []
+      },
+      {
+        "name": "DataIngestionStage",
+        "file": "src/pipeline/data_ingestion.py",
+        "type": "pipeline",
+        "description": "Data ingestion stage",
+        "dependencies": [
+          "BaseStage"
+        ]
+      },
+      {
+        "name": "MarketStructureStage",
+        "file": "src/pipeline/market_structure.py",
+        "type": "pipeline",
+        "description": "Market structure analysis stage",
+        "dependencies": [
+          "BaseStage"
+        ]
+      },
+      {
+        "name": "SignalGenerationStage",
+        "file": "src/pipeline/signal_generation.py",
+        "type": "pipeline",
+        "description": "Trading signal generation stage",
+        "dependencies": [
+          "BaseStage"
+        ]
+      }
+    ],
+    "utilities": [
+      {
+        "name": "VectorClient",
+        "file": "src/utils/vector_client.py",
+        "type": "utility",
+        "description": "Client for vector database operations",
+        "dependencies": []
+      },
+      {
+        "name": "MemoryManager",
+        "file": "src/utils/memory_manager.py",
+        "type": "utility",
+        "description": "Memory management utilities",
+        "dependencies": [
+          "VectorClient"
+        ]
+      },
+      {
+        "name": "TokenCounter",
+        "file": "src/utils/token_counter.py",
+        "type": "utility",
+        "description": "Token counting utilities",
+        "dependencies": []
+      }
+    ]
+  }
+}

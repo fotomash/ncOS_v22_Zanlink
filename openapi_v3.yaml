@@ -1,0 +1,275 @@
+
+openapi: 3.1.0
+info:
+  title: "ncOS Full Intelligence API"
+  description: "Complete API for ncOS trading engine with SMC, Wyckoff, and advanced pattern recognition"
+  version: "4.0.0"
+servers:
+  # IMPORTANT: Replace with your current ngrok URL
+  - url: "https://emerging-tiger-fair.ngrok-free.app"
+paths:
+  /api/status:
+    get:
+      summary: "System Status"
+      description: "Check system health and data availability"
+      operationId: "getStatus"
+      responses:
+        '200':
+          description: "System status information"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: ["ok", "error"]
+                  message:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  data_loaded:
+                    type: boolean
+                  intelligence_modules:
+                    type: boolean
+                  data_points:
+                    type: integer
+
+  /api/signal:
+    get:
+      summary: "Trading Signal"
+      description: "Get comprehensive trading signal with confidence score and detailed reasoning"
+      operationId: "getTradingSignal"
+      responses:
+        '200':
+          description: "Trading signal with full analysis"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signal:
+                    type: string
+                    enum: ["BUY", "SELL", "HOLD"]
+                  confidence:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 1
+                  reason:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  details:
+                    type: object
+                    properties:
+                      structure:
+                        type: object
+                      wyckoff:
+                        type: object
+                      order_blocks:
+                        type: array
+                      liquidity:
+                        type: object
+                      bull_score:
+                        type: number
+                      bear_score:
+                        type: number
+
+  /api/structure:
+    get:
+      summary: "Market Structure Analysis"
+      description: "Analyze market structure patterns (HH, HL, LL, LH) using SMC concepts"
+      operationId: "getMarketStructure"
+      responses:
+        '200':
+          description: "Market structure analysis"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  structure:
+                    type: string
+                    enum: ["BULLISH_STRUCTURE", "BEARISH_STRUCTURE", "RANGING", "UNDEFINED"]
+                  strength:
+                    type: number
+                    format: float
+                  swing_highs:
+                    type: integer
+                  swing_lows:
+                    type: integer
+                  last_high:
+                    type: number
+                  last_low:
+                    type: number
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/wyckoff:
+    get:
+      summary: "Wyckoff Phase Detection"
+      description: "Identify current Wyckoff phase (Accumulation, Distribution, Markup, Markdown)"
+      operationId: "getWyckoffPhase"
+      responses:
+        '200':
+          description: "Wyckoff phase analysis"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  phase:
+                    type: string
+                    enum: ["ACCUMULATION", "DISTRIBUTION", "MARKUP", "MARKDOWN", "TRANSITION"]
+                  confidence:
+                    type: number
+                    format: float
+                  price_position:
+                    type: number
+                    format: float
+                  volume_spike:
+                    type: number
+                    format: float
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/orderblocks:
+    get:
+      summary: "Order Block Identification"
+      description: "Identify bullish and bearish order blocks using SMC methodology"
+      operationId: "getOrderBlocks"
+      responses:
+        '200':
+          description: "Order block analysis"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_blocks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          enum: ["BULLISH_OB", "BEARISH_OB"]
+                        index:
+                          type: integer
+                        price_level:
+                          type: number
+                          format: float
+                        effectiveness:
+                          type: number
+                          format: float
+                  count:
+                    type: integer
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/liquidity:
+    get:
+      summary: "Liquidity Zone Mapping"
+      description: "Map buy-side and sell-side liquidity zones"
+      operationId: "getLiquidityZones"
+      responses:
+        '200':
+          description: "Liquidity zone analysis"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  buy_side:
+                    type: array
+                    items:
+                      type: number
+                      format: float
+                  sell_side:
+                    type: array
+                    items:
+                      type: number
+                      format: float
+                  current_price:
+                    type: number
+                    format: float
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/analysis/full:
+    get:
+      summary: "Complete Market Analysis"
+      description: "Comprehensive analysis combining all intelligence modules"
+      operationId: "getFullAnalysis"
+      responses:
+        '200':
+          description: "Complete market analysis"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signal:
+                    type: object
+                  structure:
+                    type: object
+                  wyckoff:
+                    type: object
+                  order_blocks:
+                    type: array
+                  liquidity:
+                    type: object
+                  metadata:
+                    type: object
+                    properties:
+                      data_points:
+                        type: integer
+                      time_range:
+                        type: object
+                      current_price:
+                        type: number
+                        format: float
+                      timestamp:
+                        type: string
+                        format: date-time
+
+  /api/menu:
+    get:
+      summary: "Interactive Menu"
+      description: "Get a menu of all available capabilities and sample queries"
+      operationId: "getMenu"
+      responses:
+        '200':
+          description: "Interactive menu"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  version:
+                    type: string
+                  capabilities:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        endpoint:
+                          type: string
+                        description:
+                          type: string
+                        sample_query:
+                          type: string
+                  timestamp:
+                    type: string
+                    format: date-time

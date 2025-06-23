@@ -1,0 +1,110 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-06-21T12:00:00Z",
+  "system_versions": {
+    "NCOS v11.0": {
+      "release_date": "2024-01-15",
+      "description": "Initial version of NCOS with basic agent orchestration"
+    },
+    "NCOS v11.5 Phoenix": {
+      "release_date": "2025-06-21",
+      "description": "Introduces Neural Agent Mesh for single-session multi-agent virtualization"
+    },
+    "NCOS v12.0 (Planned)": {
+      "release_date": "2025-12-01",
+      "description": "Future version with distributed agent mesh capabilities"
+    }
+  },
+  "feature_matrix": {
+    "Neural Agent Mesh": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Single-Session LLM Runtime": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Three-Tier Memory Architecture": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Token Budget Management": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Hot-Swappable Agents": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Agent Adapters": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Pipeline Stages": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Vector Memory Optimization": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Pydantic Schema Validation": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Trading Strategy Agents": {
+      "NCOS v11.0": true,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Financial Data Integration": {
+      "NCOS v11.0": true,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Trade Journaling": {
+      "NCOS v11.0": true,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "YAML-Based Configuration": {
+      "NCOS v11.0": true,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Distributed Agent Mesh": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": false,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Multi-LLM Provider Support": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Agent Health Monitoring": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Session Snapshots": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    },
+    "Error Recovery": {
+      "NCOS v11.0": false,
+      "NCOS v11.5 Phoenix": true,
+      "NCOS v12.0 (Planned)": true
+    }
+  }
+}

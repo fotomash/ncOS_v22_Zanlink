@@ -1,0 +1,62 @@
+
+openapi: 3.1.0
+info:
+  title: "ncOS Local API v2"
+  description: "An updated API for interacting with the ncOS trading engine, with detailed response schemas."
+  version: "2.0.0"
+servers:
+  # IMPORTANT: You must replace this URL with your current ngrok URL
+  # every time you restart ngrok.
+  - url: "https://emerging-tiger-fair.ngrok-free.app"
+paths:
+  /api/status:
+    get:
+      summary: "Get System Status"
+      description: "Checks the current status and health of the ncOS server."
+      operationId: "getStatus"
+      responses:
+        '200':
+          description: "Successful response with system status."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  message:
+                    type: string
+                    example: "ncOS server is running"
+                  timestamp:
+                    type: string
+                    format: "date-time"
+                    example: "2025-06-23T12:00:00Z"
+  /api/signal:
+    get:
+      summary: "Get Trading Signal"
+      description: "Requests a trading signal from the ncOS engine based on current market analysis."
+      operationId: "getSignal"
+      responses:
+        '200':
+          description: "Successful response with a trading signal."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signal:
+                    type: string
+                    enum: ["BUY", "SELL", "HOLD"]
+                    example: "HOLD"
+                  confidence:
+                    type: number
+                    format: float
+                    example: 0.75
+                  reason:
+                    type: string
+                    example: "Neutral momentum detected. Awaiting clearer pattern."
+                  timestamp:
+                    type: string
+                    format: "date-time"
+                    example: "2025-06-23T12:01:00Z"

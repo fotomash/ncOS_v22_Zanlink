@@ -1,0 +1,61 @@
+{
+  "system": {
+    "name": "ncOS v22 - Local Development",
+    "version": "22.0.0",
+    "environment": "development",
+    "debug": true
+  },
+  "api": {
+    "base_url": "https://emerging-tiger-fair.ngrok-free.app",
+    "local_port": 8000,
+    "endpoints": {
+      "data": "/data",
+      "upload_trace": "/upload-trace",
+      "trading": "/api/trading",
+      "market_data": "/api/market",
+      "signals": "/api/signals",
+      "backtest": "/api/backtest"
+    },
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    "timeout": 30,
+    "retry_attempts": 3
+  },
+  "data_sources": {
+    "primary": "local_files",
+    "fallback": "demo_data",
+    "tick_data": {
+      "path": "./data/ticks/",
+      "format": "csv"
+    },
+    "historical": {
+      "path": "./data/historical/",
+      "format": "parquet"
+    }
+  },
+  "trading": {
+    "demo_mode": true,
+    "paper_trading": true,
+    "risk_management": {
+      "max_position_size": 0.02,
+      "stop_loss": 0.01,
+      "take_profit": 0.03,
+      "max_daily_loss": 0.05
+    }
+  },
+  "llm": {
+    "enabled": true,
+    "provider": "local",
+    "model": "offline",
+    "fallback_responses": true
+  },
+  "monitoring": {
+    "log_level": "INFO",
+    "log_file": "./logs/ncos.log",
+    "metrics_enabled": true,
+    "health_check_interval": 60
+  }
+}

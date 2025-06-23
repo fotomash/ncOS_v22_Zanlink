@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Main ncOS application
+  ncos-app:
+    build:
+      context: .
+      target: app
+    container_name: ncos-zanlink-app
+    environment:
+      - ZANLINK_API_KEY=${ZANLINK_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - NCOS_ENV=production
+    ports:
+      - "8000:8000"  # Journal API
+      - "8001:8001"  # MT4 Processor
+      - "8002:8002"  # LLM Assistant
+      - "8003:8003"  # Integration Bridge
+      - "8004:8004"  # Zanlink Bridge
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - ncos-network
+
+  # Offline enrichment engine
+  ncos-enrichment:
+    build:
+      context: .
+      target: enrichment
+    container_name: ncos-zanlink-enrichment
+    environment:
+      - ZANLINK_API_KEY=${ZANLINK_API_KEY}
+      - BATCH_SIZE=1000
+      - ENRICHMENT_INTERVAL=300
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - ncos-network
+    depends_on:
+      - ncos-app
+
+  # Redis cache (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: ncos-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - ncos-network
+
+  # Nginx reverse proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: ncos-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    networks:
+      - ncos-network
+    depends_on:
+      - ncos-app
+
+networks:
+  ncos-network:
+    driver: bridge
+
+volumes:
+  redis-data:

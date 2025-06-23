@@ -1,0 +1,58 @@
+{
+  "ncos_v5_complete_config": {
+    "version": "5.0.0",
+    "features": {
+      "interactive_menu": true,
+      "multi_pair_support": true,
+      "chart_marking": true,
+      "unified_strategies": true,
+      "vector_embeddings": true,
+      "session_management": true
+    },
+    "data_config": {
+      "primary_path": "/Volumes/[C] Windows 11/Users/tom/AppData/Roaming/MetaQuotes/Terminal/81A933A9AFC5DE3C23B15CAB19C63850/MQL5/Files/PandasExports",
+      "supported_formats": ["csv", "tick", "ohlc"],
+      "auto_resample": true,
+      "timeframes": ["M1", "M5", "M15", "M30", "H1", "H4", "D1"]
+    },
+    "strategy_modules": {
+      "wyckoff": {
+        "enabled": true,
+        "phases": ["accumulation", "markup", "distribution", "markdown"]
+      },
+      "smc": {
+        "enabled": true,
+        "patterns": ["choch", "bos", "sweep", "mitigation"]
+      },
+      "fvg": {
+        "enabled": true,
+        "min_gap_size": 0.001
+      },
+      "liquidity": {
+        "enabled": true,
+        "sweep_detection": true
+      }
+    },
+    "menu_features": {
+      "quick_pairs": ["XAUUSD", "EURUSD", "GBPUSD", "BTCUSD", "ETHUSD"],
+      "actions": [
+        "select_pair",
+        "load_data",
+        "analyze",
+        "score_setup",
+        "generate_chart",
+        "view_signals",
+        "risk_analysis",
+        "change_data_path"
+      ]
+    },
+    "chart_marking": {
+      "wyckoff_phases": true,
+      "smc_patterns": true,
+      "fvg_zones": true,
+      "liquidity_levels": true,
+      "support_resistance": true,
+      "indicators": ["ma20", "ma50", "atr"]
+    }
+  }
+}

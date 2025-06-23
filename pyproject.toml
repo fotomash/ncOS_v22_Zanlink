@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "ncos-phoenix-ultimate-v24"
+version = "24.0.0"
+description = "A modular, schema-driven agent orchestration system for trading intelligence with unified memory and adaptive execution."
+authors = ["NCOS Development Team <dev@ncos.ai>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+pydantic = "^2.5.2"
+PyYAML = "^6.0.1"
+toml = "^0.10.2"
+pandas = "^2.1.3"
+numpy = "^1.26.2"
+httpx = "^0.25.1"
+loguru = "^0.7.2"
+asyncio-mqtt = "^0.16.1"
+redis = {version = "^5.0.1", extras = ["hiredis"]}
+sqlalchemy = {version = "^2.0.23", extras = ["asyncpg"]}
+alembic = "^1.12.1"
+
+# ML & Vector Store
+scikit-learn = "^1.3.2"
+scipy = "^1.11.3"
+# Add your preferred vector library here, e.g., faiss-cpu, chromadb, etc.
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
+pytest-cov = "^4.1.0"
+black = "^23.11.0"
+flake8 = "^6.1.0"
+mypy = "^1.7.1"
+isort = "^5.12.0"
+pre-commit = "^3.5.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"

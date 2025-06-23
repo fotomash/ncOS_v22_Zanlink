@@ -1,0 +1,20 @@
+# deployment_config.yaml
+deployment:
+  modules:
+    - ncos_v5_complete_tick_processor.py
+    - ncos_v5_ultimate_engine.py
+    - ncos_v5_unified_strategy.py
+    - ncos_v5_chart_marker.py
+  
+  dependencies:
+    - pandas>=2.0.0
+    - numpy>=1.24.0
+    - scipy>=1.10.0
+    - flask>=2.3.0
+    - flask-cors>=4.0.0
+    - pyyaml>=6.0
+    
+  startup_sequence:
+    1: "source ./venv/bin/activate"
+    2: "export FLASK_APP=ncos_v5_ultimate_engine.py"
+    3: "python ncos_v5_ultimate_engine.py"

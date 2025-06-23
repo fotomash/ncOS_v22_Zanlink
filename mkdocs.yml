@@ -1,0 +1,13 @@
+site_name: NCOS Documentation
+nav:
+  - Home: docs/index.md
+  - Architecture:
+      - Overview: docs/architecture/overview.md
+      - "NCOS v24.1": docs/architecture/NCOS_v24_1_Architecture.md
+      - Agent Mesh: docs/architecture/agent_mesh.md
+  - Orchestrator: docs/orchestrator/system_prompt.md
+  - API Reference: docs/api/index.md
+  - Tutorials: docs/tutorials/index.md
+  - Guides:
+      - Adding a New Agent: docs/guides/new_agent.md
+      - Orchestrator Workflows: docs/guides/orchestrator_workflows.md

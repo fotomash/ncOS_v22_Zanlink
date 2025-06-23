@@ -1,0 +1,20 @@
+# ncOS Local Development Requirements (Python 3.13+ compatible)
+
+# Server
+flask
+flask-cors
+
+# Data Handling
+pandas
+numpy
+
+# Environment & Config
+python-dotenv
+
+# HTTP Requests
+requests
+
+# Optional for enhanced features, install if needed
+# pyarrow
+# redis
+# sqlalchemy

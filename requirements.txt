@@ -1,0 +1,41 @@
+# ncOS v23 Complete Requirements
+
+# Core dependencies
+numpy>=1.24.0
+pandas>=2.0.0
+pyyaml>=6.0
+python-dateutil>=2.8.2
+pytz>=2023.3
+
+# Async and API
+aiohttp>=3.8.0
+asyncio>=3.4.3
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+websockets>=11.0
+
+# Data processing
+scikit-learn>=1.3.0
+ta>=0.10.2
+python-dotenv>=1.0.0
+
+# Visualization (optional)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+kaleido>=0.2.1
+
+# API extras
+requests>=2.31.0
+httpx>=0.25.0
+pydantic>=2.4.0
+
+# Vector operations
+faiss-cpu>=1.7.4
+annoy>=1.17.3
+
+# Development
+pytest>=7.4.0
+black>=23.10.0
+pylint>=3.0.0

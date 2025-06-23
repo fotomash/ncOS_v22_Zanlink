@@ -1,0 +1,152 @@
+openapi: 3.0.0
+info:
+  title: ncOS Trading Assistant API - Zanlink
+  description: Simplified API for ChatGPT to interact with ncOS trading system via Zanlink
+  version: 2.0.0
+servers:
+  - url: https://emerging-tiger-fair.ngrok-free.app/api/v1
+    description: Zanlink Production Server
+
+paths:
+  /analyze:
+    post:
+      summary: Analyze market or trading data
+      description: Get pre-processed analysis for any trading context
+      operationId: analyzeMarket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [market, session, patterns, performance]
+                  description: Type of analysis requested
+                symbol:
+                  type: string
+                  description: Trading symbol (e.g., XAUUSD)
+                  default: XAUUSD
+                timeframe:
+                  type: string
+                  enum: [M1, M5, M15, H1, H4, D1]
+                  description: Timeframe for analysis
+                  default: H1
+                context:
+                  type: object
+                  description: Additional context parameters
+              required:
+                - type
+      responses:
+        200:
+          description: Successful analysis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  summary:
+                    type: string
+                  insights:
+                    type: array
+                    items:
+                      type: string
+                  data:
+                    type: object
+                  recommendations:
+                    type: array
+                    items:
+                      type: string
+
+  /quick/status:
+    get:
+      summary: Get quick market status
+      description: Ultra-fast endpoint for current market status
+      operationId: getQuickStatus
+      parameters:
+        - name: symbol
+          in: query
+          schema:
+            type: string
+            default: XAUUSD
+      responses:
+        200:
+          description: Quick status summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  symbol:
+                    type: string
+                  price:
+                    type: number
+                  trend:
+                    type: string
+                  key_levels:
+                    type: object
+                  one_line_summary:
+                    type: string
+                  action:
+                    type: string
+
+  /patterns/detect:
+    get:
+      summary: Detect trading patterns
+      description: Get current pattern detection results
+      operationId: detectPatterns
+      parameters:
+        - name: symbol
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Pattern detection results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patterns:
+                    type: array
+                    items:
+                      type: object
+                  summary:
+                    type: string
+                  bias:
+                    type: string
+
+  /bridge/process:
+    post:
+      summary: Process LLM request through integration bridge
+      description: Main endpoint for complex LLM interactions
+      operationId: processBridge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                context:
+                  type: object
+                format:
+                  type: string
+                  default: chatgpt
+      responses:
+        200:
+          description: Processed response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  data:
+                    type: object

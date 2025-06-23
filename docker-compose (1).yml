@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  ncos:
+    build: .
+    container_name: ncos_v23
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+      - ./configs:/app/configs
+    environment:
+      - NCOS_DATA_PATH=/data
+      - NCOS_CONFIG_PATH=/app/configs/ncos_v23_config.json
+    restart: unless-stopped
+
+  # Optional: Add Redis for vector caching
+  redis:
+    image: redis:alpine
+    container_name: ncos_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  redis_data:

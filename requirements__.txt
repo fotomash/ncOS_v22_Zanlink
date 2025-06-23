@@ -1,0 +1,14 @@
+# Main requirements.txt for ncOS Local Development
+# Run 'pip install -r requirements.txt' after activating your environment.
+
+# Server
+flask
+flask-cors
+python-dotenv
+
+# Data Handling
+pandas
+numpy
+
+# HTTP Requests
+requests

@@ -1,0 +1,169 @@
+{
+  "timestamp": "2025-06-23T09:18:02.214357",
+  "version": "ncOS_v22_Zanlink",
+  "analysis": {
+    "total_files": 2450,
+    "total_directories": 148,
+    "virtual_env_files": 1842,
+    "core_python_files": 214,
+    "test_files": 56,
+    "config_files": 49,
+    "documentation_files": 89
+  },
+  "issues_found": [
+    {
+      "type": "duplicate_functionality",
+      "category": "main_files",
+      "files": [
+        "main.py",
+        "main_v23.py",
+        "ncos_launcher.py",
+        "v24_1.py"
+      ],
+      "recommendation": "Consolidate main_files into a single file"
+    },
+    {
+      "type": "duplicate_functionality",
+      "category": "config_files",
+      "files": [
+        ".env",
+        "ncos_ngrok.env"
+      ],
+      "recommendation": "Consolidate config_files into a single file"
+    },
+    {
+      "type": "duplicate_functionality",
+      "category": "docker_files",
+      "files": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ],
+      "recommendation": "Consolidate docker_files into a single file"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "action": "Remove virtual environment",
+      "details": "Delete ncos_env/ directory (1842 files) - should be rebuilt locally"
+    },
+    {
+      "priority": "HIGH",
+      "action": "Add missing theory modules",
+      "details": "Copy theory integration files from previous work"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Consolidate entry points",
+      "details": "Choose between main.py, main_v23.py, ncos_launcher.py, v24_1.py"
+    },
+    {
+      "priority": "MEDIUM",
+      "action": "Clean Mac OS files",
+      "details": "Remove all ._ prefixed files (Mac metadata)"
+    },
+    {
+      "priority": "LOW",
+      "action": "Organize test files",
+      "details": "Move all test files to tests/ directory"
+    }
+  ],
+  "files_to_archive": [
+    {
+      "category": "Virtual Environment",
+      "pattern": "ncos_env/",
+      "count": 1834,
+      "reason": "Complete virtual environment - should be rebuilt",
+      "examples": [
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/include/._python3.13",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/bin/._Activate.ps1",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/bin/._python3.13",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/bin/pip3",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/bin/._python3"
+      ]
+    },
+    {
+      "category": "Cache Files",
+      "pattern": "__pycache__",
+      "count": 875,
+      "reason": "Python cache files",
+      "examples": [
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/lib/python3.13/site-packages/pip/.___pycache__",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/lib/python3.13/site-packages/pip/_internal/.___pycache__",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/lib/python3.13/site-packages/pip/_internal/index/.___pycache__",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/lib/python3.13/site-packages/pip/_internal/index/__pycache__/collector.cpython-313.pyc",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/ncos_env/lib/python3.13/site-packages/pip/_internal/index/__pycache__/package_finder.cpython-313.pyc"
+      ]
+    },
+    {
+      "category": "Mac OS Files",
+      "pattern": "._",
+      "count": 1292,
+      "reason": "Mac OS metadata files",
+      "examples": [
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/._tests",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/._v24_1.py",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/._docker-compose.yml",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/._ncos_env",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/._ncos_launcher.py"
+      ]
+    },
+    {
+      "category": "Test Files",
+      "pattern": "test_",
+      "count": 50,
+      "reason": "Test files (keep in separate test directory)",
+      "examples": [
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/test_llm_integration.py",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/._test_llm_integration.py",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/core/test_predictive_scorer.py",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/core/._test_predictive_scorer.py",
+        "ncOS_v22_extracted/ncOS_v22_Zanlink/tests/test_menu_voice.py"
+      ]
+    }
+  ],
+  "missing_files": [
+    {
+      "file": "app.py",
+      "description": "Main FastAPI application entry point",
+      "severity": "HIGH"
+    },
+    {
+      "file": "config.json",
+      "description": "Main configuration file",
+      "severity": "HIGH"
+    },
+    {
+      "file": "ncos_config_ngrok.json",
+      "description": "Ngrok configuration",
+      "severity": "HIGH"
+    },
+    {
+      "file": "ncos_theory_integration.py",
+      "description": "Theory integration module",
+      "severity": "HIGH"
+    },
+    {
+      "file": "ncos_advanced_theory.py",
+      "description": "Advanced theory implementation",
+      "severity": "HIGH"
+    },
+    {
+      "file": "ncos_theory_backtester.py",
+      "description": "Backtesting module",
+      "severity": "HIGH"
+    },
+    {
+      "file": "ncos_realtime_engine.py",
+      "description": "Real-time engine",
+      "severity": "HIGH"
+    }
+  ],
+  "dependency_issues": [
+    {
+      "package": "MetaTrader5",
+      "issue": "Used in code but not in requirements.txt",
+      "fix": "Add 'MetaTrader5>=5.0.0' to requirements.txt"
+    }
+  ]
+}

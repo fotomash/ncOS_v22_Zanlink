@@ -1,0 +1,69 @@
+{
+  "system_info": {
+    "name": "NCOS Trading System",
+    "version": "24.1.0",
+    "codename": "Phoenix-Unified",
+    "build_date": "2025-06-22T03:08:27.593733",
+    "architecture": "Multi-Agent Trading Framework",
+    "description": "Consolidated trading system with SMC, Wyckoff, and institutional analysis"
+  },
+  "core_modules": {
+    "orchestration": [
+      "copilot_orchestrator.py",
+      "state_machine.py",
+      "data_pipeline.py"
+    ],
+    "market_analysis": [
+      "market_structure_analyzer_smc.py",
+      "phase_detector_wyckoff_v1.py",
+      "impulse_correction_detector.py",
+      "micro_wyckoff_phase_engine.py"
+    ],
+    "liquidity_engines": [
+      "liquidity_engine_smc.py",
+      "liquidity_sweep_detector.py",
+      "liquidity_vwap_detector.py",
+      "poi_manager_smc.py"
+    ],
+    "enrichment_engines": [
+      "smc_enrichment_engine.py",
+      "macro_enrichment_engine.py",
+      "marker_enrichment_engine.py",
+      "macro_sentiment_enricher.py"
+    ],
+    "strategy_execution": [
+      "strategy_match_engine.py",
+      "entry_executor_smc.py",
+      "fibonacci_filter.py"
+    ],
+    "data_processing": [
+      "ingestion_engine.py",
+      "indicators.py",
+      "event_detector.py"
+    ],
+    "monitoring": [
+      "performance_monitor.py",
+      "tick_manipulation_detector.py",
+      "realtime_processor.py"
+    ]
+  },
+  "configuration": {
+    "strategy_rules": "strategy_rules.json",
+    "agent_instructions": "ZANZIBAR_AGENT_INSTRUCTIONS.md"
+  },
+  "integrations": {
+    "mt5": [
+      "mt5_data_handler.py",
+      "mt5_processing_strategy.yaml",
+      "mt5_validation_schema.json"
+    ],
+    "csv_processing": [
+      "csv_to_vector_integrated.py",
+      "brown_csv_ingestion_pipeline.py"
+    ],
+    "monitoring": [
+      "monitoring_dashboard.py",
+      "multi_agent_memory_integration.py"
+    ]
+  }
+}

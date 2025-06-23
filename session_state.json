@@ -1,0 +1,54 @@
+{
+  "session_id": "ncOS_20250623_172514",
+  "created_at": "2025-06-23T17:25:14.719217",
+  "last_active": "2025-06-23T17:43:50.471717",
+  "user_preferences": {
+    "default_symbol": "XAUUSD",
+    "preferred_timeframes": [
+      "M15",
+      "M5",
+      "M1"
+    ],
+    "risk_percentage": 1.0,
+    "favorite_strategies": [
+      "SMC_Structural_Flip_POI_v12"
+    ],
+    "alert_preferences": {
+      "structure_breaks": true,
+      "poi_approaches": true,
+      "session_opens": true
+    }
+  },
+  "market_context": {
+    "XAUUSD": {
+      "htf_bias": null,
+      "last_price": null,
+      "key_levels": {
+        "resistance": [],
+        "support": [],
+        "poi_zones": []
+      },
+      "active_setups": [],
+      "last_analysis": null
+    }
+  },
+  "active_monitoring": {
+    "setups": [],
+    "alerts": [],
+    "risk_exposure": 0.0,
+    "open_positions": []
+  },
+  "conversation_context": {
+    "last_command": "",
+    "last_analysis_type": "",
+    "pending_actions": [],
+    "important_notes": []
+  },
+  "trading_journal": {
+    "setups_identified": 0,
+    "setups_triggered": 0,
+    "win_rate": 0.0,
+    "total_rr_captured": 0.0
+  },
+  "resumed_at": "2025-06-23T17:25:14.719517"
+}

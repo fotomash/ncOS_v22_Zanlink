@@ -1,0 +1,23 @@
+{
+  "pair": "BTCUSD",
+  "entry_type": "Sniper Long",
+  "entry_price": 104491.03,
+  "sl": 104245.0,
+  "tp1": 105250.0,
+  "tp2": 105730.0,
+  "risk_reward_tp1": 3.0,
+  "risk_reward_tp2": 5.0,
+  "entry_tf": "M1",
+  "confirmation_tf": "M5",
+  "bias_tf": "H1",
+  "entry_time": "2025-05-20T19:06:55",
+  "traits_triggered": [
+    "SMC Sweep",
+    "CHoCH Break + Reclaim",
+    "DSS Oversold Upturn",
+    "VWAP Lower Band Rejection",
+    "MACD Cross + Histogram Green"
+  ],
+  "conviction_score": 4.7,
+  "status": "Active"
+}

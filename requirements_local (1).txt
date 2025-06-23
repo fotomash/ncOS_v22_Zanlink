@@ -1,0 +1,22 @@
+# ncOS Local Development Requirements
+# No external API dependencies
+
+# Core
+flask==2.3.3
+flask-cors==4.0.0
+pandas==2.0.3
+numpy==1.24.3
+python-dotenv==1.0.0
+
+# Data Processing
+pyarrow==12.0.1  # For parquet files
+
+# Optional (for enhanced features)
+redis==4.6.0  # If using Redis for caching
+sqlalchemy==2.0.19  # For database
+requests==2.31.0  # For HTTP requests
+
+# Development
+pytest==7.4.0
+black==23.7.0
+flake8==6.1.0

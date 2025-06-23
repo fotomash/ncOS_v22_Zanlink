@@ -1,0 +1,35 @@
+# ncos_v5_tick_config.yaml
+tick_processing:
+  data_hierarchy:
+    priority_1: TICKS
+    priority_2: M1
+    priority_3: M5
+    fallback: ANY_AVAILABLE
+  
+  resampling_targets:
+    - 1T    # 1 minute
+    - 5T    # 5 minute
+    - 15T   # 15 minute
+    - 30T   # 30 minute
+    - 1H    # 1 hour
+    - 4H    # 4 hours
+    
+  enrichment_layers:
+    microstructure:
+      - bid_ask_spread
+      - tick_imbalance
+      - volume_profile
+      - order_flow_imbalance
+    technical:
+      - vwap
+      - cumulative_delta
+      - market_profile
+    vector:
+      - price_embeddings
+      - volume_embeddings
+      - structure_embeddings
+      
+  vector_config:
+    dimension: 1536
+    normalization: true
+    compression: false
