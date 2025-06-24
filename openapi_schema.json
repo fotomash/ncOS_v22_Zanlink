@@ -2,47 +2,43 @@
   "openapi": "3.0.0",
   "info": {
     "title": "ncOS v5 Ultimate Trading Engine API",
-    "version": "5.0.0",
-    "description": "An API for interacting with the ncOS trading analysis engine. Allows setting instruments, fetching chart data, and getting system status."
+    "version": "5.0.1",
+    "description": "Public API for interacting with the ncOS trading analysis engine. Allows setting instruments, fetching chart data, and retrieving confluence analysis."
   },
   "servers": [
     {
-      "url": "http://localhost:5005",
-      "description": "Local development server"
+      "url": "https://emerging-tiger-fair.ngrok-free.app",
+      "description": "Live ncOS analysis server"
     }
   ],
+
   "paths": {
     "/status": {
       "get": {
         "summary": "Get System Status",
-        "description": "Returns the current status of the ncOS engine, including the loaded instrument and any recent errors.",
         "operationId": "get_status",
         "responses": {
           "200": {
             "description": "System status returned successfully.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SystemStatus"
-                }
+                "schema": { "$ref": "#/components/schemas/SystemStatus" }
               }
             }
           }
         }
       }
     },
+
     "/set_instrument": {
       "post": {
         "summary": "Set Trading Instrument",
-        "description": "Sets the trading pair and timeframe for all subsequent analysis. This will load the relevant data file.",
         "operationId": "set_instrument",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SetInstrumentRequest"
-              }
+              "schema": { "$ref": "#/components/schemas/SetInstrumentRequest" }
             }
           }
         },
@@ -51,48 +47,66 @@
             "description": "Instrument set successfully.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
+                "schema": { "$ref": "#/components/schemas/ApiResponse" }
               }
             }
           },
           "400": {
-            "description": "Error setting instrument, e.g., data file not found.",
+            "description": "Error setting instrument.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
+                "schema": { "$ref": "#/components/schemas/ApiResponse" }
               }
             }
           }
         }
       }
     },
+
     "/chart": {
       "get": {
         "summary": "Get Chart Data and Markings",
-        "description": "Fetches the latest OHLC candle data for the currently set instrument and overlays it with analytical markings like SMC patterns.",
         "operationId": "get_chart_data",
         "responses": {
           "200": {
             "description": "Chart data and markings retrieved successfully.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChartDataResponse"
-                }
+                "schema": { "$ref": "#/components/schemas/ChartDataResponse" }
               }
             }
           },
           "400": {
-            "description": "Error retrieving chart data, e.g., no instrument set.",
+            "description": "No instrument set.",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
+                "schema": { "$ref": "#/components/schemas/ApiResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/analysis": {
+      "get": {
+        "summary": "Get Confluence Analysis",
+        "description": "Returns aggregated confluence score and full analysis for the current instrument.",
+        "operationId": "get_analysis",
+        "responses": {
+          "200": {
+            "description": "Analysis returned successfully.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AnalysisResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "Analysis unavailable (no instrument set).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiResponse" }
               }
             }
           }
@@ -100,58 +114,65 @@
       }
     }
   },
+
   "components": {
     "schemas": {
       "SystemStatus": {
         "type": "object",
         "properties": {
-          "status": { "type": "string", "example": "running" },
-          "current_pair": { "type": "string", "example": "XAUUSD" },
+          "status":        { "type": "string", "example": "running" },
+          "version":       { "type": "string", "example": "6.0.0" },
+          "current_pair":  { "type": "string", "example": "XAUUSD" },
           "current_timeframe": { "type": "string", "example": "M5" },
-          "data_loaded": { "type": "boolean" },
-          "last_error": { "type": ["string", "null"], "example": null }
+          "data_loaded":   { "type": "boolean" },
+          "last_error":    { "type": ["string", "null"], "example": null }
         }
       },
+
       "SetInstrumentRequest": {
         "type": "object",
+        "required": ["pair", "timeframe"],
         "properties": {
-          "pair": { "type": "string", "description": "The trading pair, e.g., 'XAUUSD'.", "example": "XAUUSD" },
-          "timeframe": { "type": "string", "description": "The chart timeframe, e.g., 'M5', 'H1'.", "example": "M5" }
-        },
-        "required": ["pair", "timeframe"]
+          "pair":      { "type": "string", "example": "XAUUSD" },
+          "timeframe": { "type": "string", "enum": ["M1","M5","M15","M30","H1","H4","D1"], "example": "M5" }
+        }
       },
+
       "ApiResponse": {
         "type": "object",
         "properties": {
-          "status": { "type": "string", "example": "success" },
+          "status":  { "type": "string", "example": "success" },
           "message": { "type": "string", "example": "Operation completed." }
         }
       },
+
       "Candle": {
         "type": "object",
         "properties": {
           "timestamp": { "type": "string", "format": "date-time" },
-          "open": { "type": "number" },
-          "high": { "type": "number" },
-          "low": { "type": "number" },
-          "close": { "type": "number" }
+          "open":      { "type": "number" },
+          "high":      { "type": "number" },
+          "low":       { "type": "number" },
+          "close":     { "type": "number" }
         }
       },
+
       "ChartMarking": {
         "type": "object",
         "properties": {
-          "type": { "type": "string", "example": "FVG_Bullish" },
-          "description": { "type": "string" },
-          "from_time": { "type": "string", "format": "date-time" },
-          "to_time": { "type": "string", "format": "date-time" },
+          "type":              { "type": "string", "example": "FVG_Bullish" },
+          "description":       { "type": "string" },
+          "from_time":         { "type": "string", "format": "date-time" },
+          "to_time":           { "type": "string", "format": "date-time" },
           "price_level_start": { "type": "number" },
-          "price_level_end": { "type": "number" }
+          "price_level_end":   { "type": "number" }
         }
       },
+
       "ChartDataResponse": {
         "type": "object",
         "properties": {
-          "pair": { "type": "string" },
+          "pair":      { "type": "string" },
           "timeframe": { "type": "string" },
           "candles": {
             "type": "array",
@@ -161,6 +182,17 @@
             "type": "array",
             "items": { "$ref": "#/components/schemas/ChartMarking" }
           }
+        }
+      },
+
+      "AnalysisResponse": {
+        "type": "object",
+        "properties": {
+          "pair":             { "type": "string" },
+          "timeframe":        { "type": "string" },
+          "confluence_score": { "type": "number", "example": 0.68 },
+          "score_breakdown":  { "type": "object" },
+          "full_analysis":    { "type": "object" }
         }
       }
     }
